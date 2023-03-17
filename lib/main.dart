@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 
 import 'presentation/theme.dart' as Theme;
-import 'domain/entities/activity.dart';
-import 'presentation/activities_view.dart';
+import 'service_locator.dart' as sl;
+import 'presentation/navigation/router.dart' as r;
 
 
-void main() {
+void main() async{
+  await sl.init();
   runApp(const MyApp());
 }
-
-const _testActivities = [
-  Activity(name: "Test"),
-  Activity(name: "More Test"),
-];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Get My Life in Order',
       theme: Theme.theme,
-      home: const ActivitiesView(activities: _testActivities),
+      routerConfig: r.router,
+      // home: const ActivitiesView(),
     );
   }
 }

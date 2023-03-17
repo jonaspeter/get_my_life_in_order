@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-final _scheme = ColorScheme.fromSeed(seedColor: const Color(0xFFD44FB3));
+final _scheme = ColorScheme.fromSeed(seedColor: const Color(0xFFD44FB3)).copyWith(
+  primary: const Color(0xFFD44FB3),
+  secondary: const Color(0xFF47B17B),
+);
 
 final _textTheme = TextTheme(
   titleLarge: TextStyle(fontFamily: "Mulish", fontWeight: FontWeight.bold, fontSize: 22),
@@ -8,6 +11,7 @@ final _textTheme = TextTheme(
 );
 
 final ThemeData theme = ThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD44FB3)),
+    fontFamily: "Mulish",
+    colorScheme: _scheme,
     cardColor: _scheme.primaryContainer,
     textTheme: _textTheme);
