@@ -5,7 +5,7 @@ final _scheme = ColorScheme.fromSeed(seedColor: const Color(0xFFD44FB3)).copyWit
   secondary: const Color(0xFF47B17B),
 );
 
-final _textTheme = TextTheme(
+const _textTheme = TextTheme(
   titleLarge: TextStyle(fontFamily: "Mulish", fontWeight: FontWeight.bold, fontSize: 22),
   titleMedium: TextStyle(fontFamily: "Mulish", fontWeight: FontWeight.bold, fontSize: 16),
 );

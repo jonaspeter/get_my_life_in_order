@@ -45,3 +45,7 @@ app.*.map.json
 
 # Generated Files
 /lib/domain/entities/activity.freezed.dart
+/lib/application/navigation/router.gr.dart
+/lib/application/navigation/navigation_bloc.freezed.dart
+/lib/application/activities/observer/activities_observer_bloc.freezed.dart
+/lib/application/activities/controller/activities_controller_bloc.freezed.dart
