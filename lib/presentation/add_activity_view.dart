@@ -47,8 +47,18 @@ class _AddActivityFormState extends State<AddActivityForm> {
     final actCtrlBloc = context.read<ActivitiesControllerBloc>();
     final router = AutoRouter.of(context);
     return WillPopScope(
-      onWillPop: () {
-        navigationBloc.add(GoBack(router));
+      onWillPop: () async {
+        bool shouldPop = true;
+        if (hasUnsafedChanges()) {
+          shouldPop = await showDialog(
+              context: context,
+              builder: (context) {
+                return const UnsavedChangesDialog();
+              });
+        }
+        if (shouldPop) {
+          navigationBloc.add(GoBack(router));
+        }
         return Future<bool>(() => false);
       },
       child: Form(
@@ -87,9 +97,15 @@ class _AddActivityFormState extends State<AddActivityForm> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
-                    onPressed: () {
-                      //TODO ask before cancel
-                      navigationBloc.add(GoBack(router));
+                    onPressed: () async {
+                      bool shouldGoBack = true;
+                      if (hasUnsafedChanges()) {
+                        shouldGoBack = await showDialog(
+                            context: context, builder: (context) => const UnsavedChangesDialog());
+                      }
+                      if (shouldGoBack) {
+                        navigationBloc.add(GoBack(router));
+                      }
                     },
                     child: const Text('Cancel'),
                   ),
@@ -99,6 +115,37 @@ class _AddActivityFormState extends State<AddActivityForm> {
           ],
         ),
       ),
+    );
+  }
+
+  bool hasUnsafedChanges() {
+    return nameController.text.isNotEmpty;
+  }
+}
+
+class UnsavedChangesDialog extends StatelessWidget {
+  const UnsavedChangesDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text("There are unsaved changes. Go back anyway?"),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+          child: const Text('Yes'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context, false);
+          },
+          child: const Text('No'),
+        ),
+      ],
     );
   }
 }
