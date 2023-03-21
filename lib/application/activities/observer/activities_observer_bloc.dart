@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/activity_failures.dart';
 import '../../../domain/entities/activity.dart';
 import '../../../domain/repositories/activity_repository.dart';
 
@@ -25,17 +27,19 @@ class ActivitiesObserverBloc extends Bloc<ActivitiesObserverEvent, ActivitiesObs
 
   ActivitiesObserverBloc({required this.activityRepo})
       : super(const Initial()) {
+
     on<Observe>((event, emit) async {
       await _streamSubscription?.cancel();
       final controller = activityRepo.watchAll();
       _streamSubscription = controller.stream.listen((event) {
-        add(const Load());
+        add(ActivitiesObserverEvent.load(event));
       });
     });
 
     on<Load>((event, emit) {
-      final activities = activityRepo.getAll();
-      activities.match((l) {}, (r) => emit(Loaded(r)));
+      final activities = event.activities;
+      activities.match((l) {}, (r) {
+        emit(Loaded(r));});
     });
   }
 }

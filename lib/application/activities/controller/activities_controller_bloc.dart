@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/entities/activity.dart';
 import '../../../domain/repositories/activity_repository.dart';
 
 part 'activities_controller_event.dart';
@@ -15,7 +14,7 @@ class ActivitiesControllerBloc extends Bloc<ActivitiesControllerEvent, Activitie
   /// Activities Controller Bloc
   ActivitiesControllerBloc({required this.activityRepo}) : super(const Initial()) {
     on<AddActivity>((event, emit) {
-      activityRepo.addActivity(event.activity);
+      activityRepo.addActivity(event.name);
     });
   }
 }

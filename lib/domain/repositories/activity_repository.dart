@@ -12,5 +12,5 @@ abstract class ActivityRepository {
 
   StreamController<Either<af.ActivityFailure, BuiltList<Activity>>> watchAll();
 
-  Either<af.ActivityFailure, Unit> addActivity(Activity activity);
+  Either<af.ActivityFailure, Unit> addActivity(String name);
 }

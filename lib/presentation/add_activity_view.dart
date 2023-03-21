@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_my_life_in_order/application/activities/controller/activities_controller_bloc.dart';
 
 import '../application/navigation/navigation_bloc.dart';
-import '../domain/entities/activity.dart';
 
 @RoutePage()
 class AddActivityView extends StatelessWidget {
@@ -86,8 +85,7 @@ class _AddActivityFormState extends State<AddActivityForm> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        actCtrlBloc.add(ActivitiesControllerEvent.addActivity(
-                            Activity(name: nameController.text)));
+                        actCtrlBloc.add(ActivitiesControllerEvent.addActivity(nameController.text));
                         navigationBloc.add(GoBack(router));
                       }
                     },

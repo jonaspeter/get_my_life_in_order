@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           create: (context) => NavigationBloc(),
         ),
         BlocProvider(
-          create: (context) => ActivitiesControllerBloc(activityRepo: sl.sl<ActivityRepository>()),
+          create: (context) => ActivitiesControllerBloc(activityRepo: sl.sl<ActivityRepository>())
         ),
         BlocProvider(
           create: (context) => ActivitiesObserverBloc(activityRepo: sl.sl<ActivityRepository>())

@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart' hide State;
 
-
 import '../application/activities/observer/activities_observer_bloc.dart';
 import 'widgets/activity_card.dart';
 import '../domain/entities/activity.dart';
@@ -45,7 +44,10 @@ class _ActivitiesListViewState extends State<ActivitiesListView> {
           child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: activities.match(
-                  () => const [Text("Error")], (a) => a.map((e) => ActivityCard(activity: e)).toList())),
+                //TODO handle this case of missing activities better
+                () => const [Text("Error")],
+                (a) => a.map((e) => ActivityCard(activity: e)).toList(),
+              )),
         ),
       ),
       floatingActionButton: FloatingActionButton(

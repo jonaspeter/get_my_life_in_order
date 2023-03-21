@@ -4,5 +4,5 @@ part of 'activities_controller_bloc.dart';
 @freezed
 class ActivitiesControllerEvent with _$ActivitiesControllerEvent {
   /// Activity Controller Event to add an Activity
-  const factory ActivitiesControllerEvent.addActivity(Activity activity) = AddActivity;
+  const factory ActivitiesControllerEvent.addActivity(String name) = AddActivity;
 }

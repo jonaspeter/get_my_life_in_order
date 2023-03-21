@@ -19,6 +19,8 @@ dependencies:
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   built_collection: ^5.1.1
+  uuid: ^3.0.7
+  mocktail: ^0.3.0
 
 #  cupertino_icons: ^1.0.2
 
